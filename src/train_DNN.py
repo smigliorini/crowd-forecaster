@@ -6,10 +6,10 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-file_name = './export_all_poi.csv'
-epochs = 500
-nodes = 512
-drop = 0.2
+file_name = '../data/export_61.csv'
+epochs = 300
+nodes = 256
+drop = 0.6
 train = 'raw' 
 #train = 'context'
 
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     print(hist.tail())
 
     test_results = {}
-    test_results['DNN'] = dnn_model.evaluate(
+    test_results = dnn_model.evaluate(
         test_features, test_labels, verbose=1)
 
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
 
     title = '\n---------------result--------------------\nFile name: {}\nData tipe: {}\n'.format(file_name, train)
     dnn = 'nodes: {} \t dropout: {} \t epochs: {}\n'.format(nodes, drop, epochs)
-    result = 'MAPE: {}\n'.format(test_results[1])###################
+    result = 'MAPE: {}\n'.format(round(test_results[1],1))
 
-    print(title, dnn, result) 
+    print(title + dnn + result) 
 
